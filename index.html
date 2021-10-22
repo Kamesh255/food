@@ -1,0 +1,78 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title> 
+ </head>
+
+ <link rel="stylesheet" href="./styles/style.css"/>
+
+ <body>
+     <div id="navbar"></div>
+     <input type="text" id="query" placeholder="search for a receipe"/>
+    <button id="btn">Search</button> 
+     <div id="receipes"></div>
+ </body>
+
+ </html>
+
+ <script type="module">
+     import navbar from "./components/navbar.js";
+    //  console.log("navbar:", navbar)
+    let navbar_div = document.getElementById("navbar");
+    let btn = document.getElementById("btn");
+    btn.onclick = function(){
+        searchReceipe()
+    }
+
+    navbar_div.innerHTML = navbar(); 
+     
+    searchReceipe()
+
+    async function searchReceipe(){
+        let query = document.getElementById("query").value
+     
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+
+            let data = await res.json(); 
+            console.log("data:", data)
+            appendReceipe(data.meals);
+        }     
+       
+    function appendReceipe(receipe){
+        let receipes = document.getElementById("receipes"); 
+       
+         receipes.innerHTML = null; 
+
+        receipe.forEach(function(receipe_data){
+
+            
+        let div = document.createElement("div")
+        div.setAttribute("class","idiv")
+
+        let div1 = document.createElement("div")
+        div1.setAttribute("class","idiv1")
+
+        let div2 = document.createElement("div")
+        div2.setAttribute("class","idiv2") 
+ 
+        let Meal = document.createElement("p");
+        Meal.innerText = receipe_data.strMeal
+      
+
+        let MealThumb = document.createElement("img");
+        MealThumb.src = receipe_data.strMealThumb
+        MealThumb.setAttribute("class","img")
+
+        div1.append(MealThumb)
+        div2.append(Meal) 
+        div.append(div1,div2)
+        receipes.append(div);
+        }) 
+    }
+     
+ </script>  
+
+   

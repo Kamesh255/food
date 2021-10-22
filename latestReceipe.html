@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+
+<link rel="stylesheet" href="./styles/style.css"/>
+
+<body>
+    <div id="navbar"></div>
+    
+    <div id="receipes"></div>
+</body>
+
+</html>
+
+<script type="module">
+    import navbar from "./components/navbar.js";
+   //  console.log("navbar:", navbar)
+   let navbar_div = document.getElementById("navbar");
+    
+   navbar_div.innerHTML = navbar(); 
+    
+   searchReceipe()
+
+   async function searchReceipe(){
+        
+           let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=a`);
+
+           let data = await res.json(); 
+           console.log("data:", data)
+           appendReceipe(data.meals);
+       }     
+      
+   function appendReceipe(receipe){
+       let receipes = document.getElementById("receipes"); 
+      
+        receipes.innerHTML = null; 
+
+       receipe.forEach(function(receipe_data){
+
+        let div = document.createElement("div")
+        div.setAttribute("class","div")
+
+        let div1 = document.createElement("div")
+        div1.setAttribute("class","div1")
+
+        let div2 = document.createElement("div")
+        div2.setAttribute("class","div2")
+
+       let Meal = document.createElement("p");
+       Meal.innerText = receipe_data.strMeal
+       Meal.setAttribute("class","p1")
+     
+
+       let MealThumb = document.createElement("img");
+       MealThumb.src = receipe_data.strMealThumb
+       MealThumb.setAttribute("class","img")
+   
+     
+       let  Inst1 = document.createElement("p");
+       Inst1.innerText = receipe_data.strIngredient1
+
+        let  Inst2 = document.createElement("p");
+        Inst2.innerText = receipe_data.strIngredient2
+
+        let  Inst3 = document.createElement("p");
+        Inst3.innerText = receipe_data.strIngredient3
+
+        let  Inst4 = document.createElement("p");
+        Inst4.innerText = receipe_data.strIngredient4
+
+        let  Inst5 = document.createElement("p");
+        Inst5.innerText = receipe_data.strIngredient5
+
+        let  Inst6 = document.createElement("p");
+        Inst6.innerText = receipe_data.strIngredient6
+
+        let  Inst7 = document.createElement("p");
+        Inst7.innerText = receipe_data.strIngredient7
+
+        let  Inst8 = document.createElement("p");
+        Inst8.innerText = receipe_data.strIngredient8
+
+        let  Inst9 = document.createElement("p");
+        Inst9.innerText = receipe_data.strIngredient9
+
+        div1.append(MealThumb)
+        div2.append(Meal,Inst1,Inst2,Inst3,Inst4,Inst5,Inst6,Inst7,Inst8,Inst9)
+        div.append(div1,div2)
+       receipes.append(div);
+       }) 
+   }
+    
+</script>  
+
+ 

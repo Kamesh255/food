@@ -1,0 +1,64 @@
+ 
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4%;
+    padding-right: 4%;
+    border: solid 1px black;
+}
+#options{
+    display: flex;
+    justify-content: space-between;
+}
+
+#options h3{
+    padding-left: 30px;
+    padding-right: 10px;
+}
+ #container{
+     display: grid;
+     grid-template-columns: repeat(4, 25%);
+     grid-gap: 20px ;
+      justify-content: center;
+      padding: 5%;
+ }
+ img{
+     width: 30%;
+     height: 50%; 
+ }
+ .pro{
+     background-color: grey;
+     text-align: center;
+ }
+ #receipes{
+     display: grid;
+     grid-template-columns: 25% 25% 25% 25%;
+     grid-gap: 5px; 
+     padding: 5px;
+ }
+ .div{
+     display: grid;
+     grid-template-columns: 100%;
+    background-color: lavenderblush;
+     border: 1px solid grey; 
+ }
+ .img{
+     width: 200px;
+     height: 200px;
+    
+    
+ }
+ .div1{
+     width: 100%;
+     margin: auto;
+     /* background-color: indianred; */
+     text-align: center;
+ }
+ .p1{
+     text-align: center;
+
+ }
+ .idiv{
+     text-align: center;
+     background-color: lightsalmon;
+ }

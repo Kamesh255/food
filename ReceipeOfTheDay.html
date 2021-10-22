@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+
+<link rel="stylesheet" href="./styles/style.css"/>
+
+<body>
+    <div id="navbar"></div>
+    
+    <div id="receipes"></div>
+</body>
+
+</html>
+
+<script type="module">
+    import navbar from "./components/navbar.js";
+   //  console.log("navbar:", navbar)
+   let navbar_div = document.getElementById("navbar");
+    
+   navbar_div.innerHTML = navbar(); 
+    
+   searchReceipe()
+
+   async function searchReceipe(){
+        
+           let res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772`);
+
+           let data = await res.json(); 
+           console.log("data:", data)
+           appendReceipe(data.meals);
+       }     
+      
+   function appendReceipe(receipe){
+       let receipes = document.getElementById("receipes"); 
+      
+        receipes.innerHTML = null; 
+
+       receipe.forEach(function(receipe_data){
+
+        let div = document.createElement("div")
+        div.setAttribute("class","div")
+
+        let div1 = document.createElement("div")
+        div1.setAttribute("class","div1")
+
+        let div2 = document.createElement("div")
+        div2.setAttribute("class","div2")
+
+       let Meal = document.createElement("p");
+       Meal.innerText = receipe_data.strMeal
+       Meal.setAttribute("class","p1")
+     
+
+       let MealThumb = document.createElement("img");
+       MealThumb.src = receipe_data.strMealThumb
+       MealThumb.setAttribute("class","img")
+   
+     
+       let  Instructions = document.createElement("p");
+        Instructions.innerText = receipe_data.strInstructions
+        div1.append(MealThumb)
+        div2.append(Meal,Instructions)
+        div.append(div1,div2)
+       receipes.append(div);
+       }) 
+   }
+    
+</script>  
